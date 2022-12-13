@@ -1,6 +1,6 @@
 ﻿namespace Files
 {
-    public class BaseFile<ElementType, ReaderType, WriterType> where ElementType: FileElementInterface<ElementType, WriterType>
+    public class BaseFile<ElementType, ReaderType, WriterType> where ElementType: FileElementInterface<ElementType>
     {
         public readonly string filename;
         public int elementsNum;
@@ -28,18 +28,6 @@
 
         public void RandomFillFile()
         {
-            /*BinaryWriter fout;
-            try
-            {
-                //var file = File.Open("t.txt", FileMode.Create);
-                fout = new WriterType(File.Open(filename, FileMode.Create));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return;
-            }*/
-
             OpenWriter();
 
             Random random = new Random();
@@ -48,7 +36,6 @@
             var r = (ElementType.GetRandom(random));
             for (int i = 0; i < elementsNum; i++, r = ElementType.GetRandom(random))
             {
-                //fout.Write(r.ToString());
                 WriteElement(r);
                 if (debug)
                 {
@@ -59,8 +46,6 @@
             {
                 Console.WriteLine();
             }
-
-            //fout.Close();
 
             CloseWriter();
 
@@ -73,17 +58,6 @@
 
         public IEnumerable<ElementType> ReadNextElement(int elementsNum = -1)
         {
-            /*BinaryReader fin;
-            try
-            {
-                fin = new BinaryReader(File.OpenRead(filename));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                yield break;
-            }*/
-
             if (elementsNum == -1)
             {
                 elementsNum = this.elementsNum;

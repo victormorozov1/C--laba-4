@@ -29,7 +29,6 @@
         public override void WriteElement(Number element)
         {
             fout.Write(element.y);
-            Console.WriteLine("!!!" + element.y.ToString());
         }
 
         public override void CloseWriter()
