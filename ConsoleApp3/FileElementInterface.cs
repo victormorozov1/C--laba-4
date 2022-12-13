@@ -8,11 +8,12 @@ using System.Xml;
 
 namespace Files
 {
-    public interface FileElementInterface<T>
+    public interface FileElementInterface<T, WriterType>
     {
         public static abstract T GetRandom(Random random);
         public string ToString();
-        public static abstract T Read(BinaryReader reader);
+        //public static abstract T Read(ReaderType reader);
+        public void Write(WriterType writer);
     }
 
     /*public interface WriterInterface<T>
@@ -33,9 +34,9 @@ namespace Files
         }
     }*/
 
-    public class Number: FileElementInterface<Number>
+    public class Number: FileElementInterface<Number, BinaryWriter>
     {
-        int y;
+        public int y;
         public Number(int y)
         {
             this.y = y;
@@ -68,6 +69,11 @@ namespace Files
             }
 
             return t;
+        }
+
+        public void Write(BinaryWriter writer)
+        {
+            writer.Write(y);
         }
     }
 }

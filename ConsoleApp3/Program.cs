@@ -71,7 +71,12 @@ class Program
     
     public static void Main()
     {
-        var binFile = new BinaryNumberFile("t.txt", new int[] { 1, 5 }, new int[] { 10, 20 });
+        var binFile = new BinaryNumberFile("t.txt", new int[] { 4, 8 }, new int[] { 10, 20 });
         binFile.RandomFillFile();
+
+        foreach (var el in binFile.ReadNextElement())
+        {
+            Console.WriteLine(el.y);
+        }
     }
 }
