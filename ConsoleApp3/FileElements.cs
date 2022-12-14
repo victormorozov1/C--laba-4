@@ -8,9 +8,10 @@ using System.Xml;
 
 namespace Files
 {
-    public interface FileElementInterface<T>
+    public interface FileElementInterface<T> where T : FileElementInterface<T>
     {
         public static abstract T GetRandom(Random random);
+
         public string ToString();
     }
 
@@ -34,5 +35,64 @@ namespace Files
         {
             return y.ToString();
         }
+    }
+
+    public class Toy : FileElementInterface<Toy>
+    {
+        public int minAge, price;
+        string name;
+        public static int readFieldsNum = 3;
+
+        public static string[] possibleNames = {
+            "Spaik",
+            "Potato",
+            "Веселый_водовоз",
+            "Zaxar",
+            "Brawl_Stars_Toy",
+            "Star"
+        };
+
+        public Toy(string name, int price, int minAge) {
+            this.name = name;
+            this.price = price;
+            this.minAge = minAge;
+        }
+
+        public static Toy GetRandom(Random random)
+        {
+            if (random == null)
+            {
+                random = new Random();
+            }
+
+            var name = possibleNames[random.Next(possibleNames.Length)];
+            var minAge = random.Next(0, 18);
+            var price = random.Next(1, 11964);
+            return new Toy(name, price, minAge);
+        }
+
+        public override string ToString()
+        {
+            return $"{name} {price} {minAge} ";
+        }
+
+        public static Toy FromString(string str, string sep = " ")
+        {
+            var splitData = str.Split(sep);
+            return new Toy(splitData[0], int.Parse(splitData[1]), int.Parse(splitData[2]));
+        }
+
+        public void SetFromString(string str, string sep = " ")
+        {
+            Clone(Toy.FromString(str, sep: sep));
+        }
+
+        public void Clone(Toy other)
+        {
+            name = other.name;
+            minAge = other.minAge;
+            price = other.price;
+        } 
+
     }
 }

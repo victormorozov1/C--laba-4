@@ -28,7 +28,14 @@
 
         public void RandomFillFile()
         {
-            OpenWriter();
+            try
+            {
+                OpenWriter();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             Random random = new Random();
             elementsNum = random.Next(elementsNumRange[0], elementsNumRange[1]);
@@ -63,7 +70,14 @@
                 elementsNum = this.elementsNum;
             }
 
-            OpenReader();
+            try
+            {
+                OpenReader();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             for (int i = 0; i < elementsNum; i++)
             {

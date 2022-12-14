@@ -1,4 +1,5 @@
-﻿using Files;
+﻿using ConsoleApp3;
+using Files;
 
 class Program
 {
@@ -71,12 +72,11 @@ class Program
     
     public static void Main()
     {
-        var binFile = new BinaryNumberFile("t.txt", new int[] { 4, 8 }, new int[] { 10, 20 });
-        binFile.RandomFillFile();
+        var toyFile = new ToyFile("toys.txt", new int[] { 4, 7 });
+        //toyFile.RandomFillFile();
 
-        foreach (var el in binFile.ReadNextElement())
-        {
-            Console.WriteLine(el.y);
+        foreach (var toy in toyFile.ReadNextElement(4)) { 
+            Console.WriteLine(toy.ToString());
         }
     }
 }

@@ -16,14 +16,7 @@
 
         public override void OpenWriter()
         {
-            try
-            {
-                fout = new BinaryWriter(File.Open(filename, FileMode.OpenOrCreate));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            fout = new BinaryWriter(File.Open(filename, FileMode.OpenOrCreate));
         }
 
         public override void WriteElement(Number element)
