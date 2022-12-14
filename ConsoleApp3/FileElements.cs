@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace Files
 {
-    public interface FileElementInterface<T> where T : FileElementInterface<T>
+    public interface FileElementInterface<T>
     {
         public static abstract T GetRandom(Random random);
 
@@ -17,7 +17,7 @@ namespace Files
 
     public class Number: FileElementInterface<Number>
     {
-        public int y;
+        private int y;
         public Number(int y)
         {
             this.y = y;
@@ -31,11 +31,23 @@ namespace Files
             return new Number(random.Next(-100, 100));
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return y.ToString();
         }
+
+        public void SetVal(int val)
+        {
+            y = val;
+        }
+
+        public int ToInt() 
+        {
+            return y;
+        }
     }
+
+     
 
     public class Toy : FileElementInterface<Toy>
     {
@@ -93,6 +105,5 @@ namespace Files
             minAge = other.minAge;
             price = other.price;
         } 
-
     }
 }

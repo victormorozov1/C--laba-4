@@ -1,22 +1,27 @@
 ﻿using Files;
+using Functions;
 
 class Program
 {
-    /*public static void FirstTask()
+    public static void FirstTask()
     {
-        var file = new BinaryNumberFile("input.txt", 5, 10);
-        file.FillNumbers();
+        var file = new BinaryNumberFile("input.txt", new int[] {100, 1000}, new int[] {0, 100000});
+        file.RandomFillFile();
+
+        file.WriteFileTOConsole();
+        Console.WriteLine();
+
         BinaryWriter fout = new BinaryWriter(File.Open("output.txt", FileMode.Create));
-        foreach (var number in file.ReadNextNum())
+        foreach (var number in file.ReadNextElement())
         {
-            int absNum = Math.Abs(number);
+            int absNum = Math.Abs(number.ToInt());
             if (absNum % 10 == Functions.Functions.FirstDigit(absNum))
             {
-                fout.Write(number);
+                fout.Write(number.ToInt());
             }
         }
         fout.Close();
-    }*/
+    }
 
     /*public static void FillMatrix(int[,] m, int n, int firstDigitToReplace, BinaryNumberFile inputFile)
     {
@@ -71,11 +76,6 @@ class Program
     
     public static void Main()
     {
-        var toyFile = new ToyFile("toys.txt", new int[] { 4, 7 });
-        //toyFile.RandomFillFile();
-
-        foreach (var toy in toyFile.ReadNextElement(4)) { 
-            Console.WriteLine(toy.ToString());
-        }
+        FirstTask();
     }
 }

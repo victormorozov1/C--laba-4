@@ -20,7 +20,7 @@
 
         public override void WriteElement(Number element)
         {
-            fout.Write(element.y);
+            fout.Write(element.ToInt());
         }
 
         public override void CloseWriter()
@@ -35,7 +35,7 @@
 
         public override void ReadElement(Number element)
         {
-            element.y = fin.ReadInt32();
+            element.SetVal(fin.ReadInt32());
         }
 
         public override void CloseReader()

@@ -35,7 +35,7 @@ namespace Files
             fin = new StreamReader(filename);
         }
 
-        public override void ReadElement(Toy toy) // Сделать через дополнения класса
+        public override void ReadElement(Toy toy)
         {
             string word = "";
             for (int i = 0; i < Toy.readFieldsNum; i++)

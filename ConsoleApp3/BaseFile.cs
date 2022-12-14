@@ -63,6 +63,14 @@
             }
         }
 
+        public void WriteFileTOConsole(string sep=" ")
+        {
+            foreach (var element in ReadNextElement(this.elementsNum))
+            {
+                Console.Write(element + sep);
+            }
+        }
+
         public IEnumerable<ElementType> ReadNextElement(int elementsNum = -1)
         {
             if (elementsNum == -1)
