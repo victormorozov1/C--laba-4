@@ -57,6 +57,6 @@ class Program
 
     public static void Main()
     {
-        SecondTask();
+        FirstTask();
     }
 }
