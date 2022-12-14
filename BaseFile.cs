@@ -1,6 +1,6 @@
 ﻿namespace Files
 {
-    public class BaseFile<ElementType, ReaderType, WriterType> where ElementType: FileElementInterface<ElementType>
+    public class BaseFile<ElementType, ReaderType, WriterType> where ElementType : FileElementInterface<ElementType>
     {
         public readonly string filename;
         public int elementsNum;
@@ -63,7 +63,7 @@
             }
         }
 
-        public void WriteFileTOConsole(string sep=" ")
+        public void WriteFileTOConsole(string sep = " ")
         {
             foreach (var element in ReadNextElement(this.elementsNum))
             {

@@ -1,6 +1,7 @@
-﻿using Files;
+﻿using FileClasses;
 using System.IO;
 
+namespace Main;
 public static class Functions
 {
     public static int FirstDigit(int number)

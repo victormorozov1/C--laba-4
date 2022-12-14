@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    public class BaseTextFile<FileElement> : BaseFile<FileElement, StreamReader, StreamWriter> 
+    public class BaseTextFile<FileElement> : BaseFile<FileElement, StreamReader, StreamWriter>
         where FileElement : FileElementInterface<FileElement>
     {
         public BaseTextFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) { }

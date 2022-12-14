@@ -1,11 +1,12 @@
-﻿using Files;
+﻿using FileClasses;
 
+namespace Main;
 
 class Program
 {
     public static void FirstTask()
     {
-        var file = new BinaryNumberFile("input.txt", new int[] {100, 1000}, new int[] {0, 100000});
+        var file = new BinaryNumberFile("input.txt", new int[] { 100, 1000 }, new int[] { 0, 100000 });
         file.RandomFillFile();
 
         file.WriteFileTOConsole();
@@ -22,12 +23,12 @@ class Program
         }
         fout.Close();
     }
-    
+
     public static void SecondTask(string filename = "input.txt",
-        int n = 10, int firstDigitToReplace = 1, 
+        int n = 10, int firstDigitToReplace = 1,
         bool printMatrix = true)
     {
-        BinaryNumberFile inputFile = new BinaryNumberFile(filename, new int[] {10, 100}, new int[] {10, 100}, debug:false);
+        BinaryNumberFile inputFile = new BinaryNumberFile(filename, new int[] { 10, 100 }, new int[] { 10, 100 }, debug: false);
         inputFile.RandomFillFile();
 
         inputFile.WriteFileTOConsole();
@@ -46,9 +47,9 @@ class Program
                 }
                 Console.WriteLine();
             }
-        } 
+        }
     }
-    
+
     public static void ThirdTask()
     {
 

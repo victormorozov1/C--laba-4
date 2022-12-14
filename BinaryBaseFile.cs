@@ -1,6 +1,6 @@
 ﻿namespace Files
 {
-    public class BinaryBaseFile<ElementType> :BaseFile<ElementType, BinaryReader, BinaryWriter> where ElementType : FileElementInterface<ElementType>
+    public class BinaryBaseFile<ElementType> : BaseFile<ElementType, BinaryReader, BinaryWriter> where ElementType : FileElementInterface<ElementType>
     {
         private readonly int[] numbersRange;
         public bool debug;

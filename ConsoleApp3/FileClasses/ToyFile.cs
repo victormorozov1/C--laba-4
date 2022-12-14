@@ -1,14 +1,13 @@
-﻿using Files;
-using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Files
+namespace ConsoleApp3.FileClasses
 {
-    /*public class ToyFile : BaseFile<Toy, BinaryReader, BinaryWriter>
+    public class ToyFile : BaseFile<Toy, BinaryReader, BinaryWriter>
     {
         private readonly int[] numbersRange;
         public bool debug;
@@ -61,5 +60,5 @@ namespace Files
         {
             fin.Close();
         }
-    }*/
-}
+    }
+}*/
