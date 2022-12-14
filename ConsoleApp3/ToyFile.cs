@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Files
 {
-    public class ToyFile : BaseFile<Toy, StreamReader, StreamWriter>
+    /*public class ToyFile : BaseFile<Toy, BinaryReader, BinaryWriter>
     {
         private readonly int[] numbersRange;
         public bool debug;
@@ -17,7 +17,7 @@ namespace Files
 
         public override void OpenWriter()
         {
-            fout = new StreamWriter(filename);
+            fout = new BinaryWriter(filename);
         }
 
         public override void WriteElement(Toy element)
@@ -61,5 +61,5 @@ namespace Files
         {
             fin.Close();
         }
-    }
+    }*/
 }

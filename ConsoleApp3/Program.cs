@@ -1,5 +1,5 @@
 ﻿using Files;
-using Functions;
+
 
 class Program
 {
@@ -15,39 +15,12 @@ class Program
         foreach (var number in file.ReadNextElement())
         {
             int absNum = Math.Abs(number.ToInt());
-            if (absNum % 10 == Functions.Functions.FirstDigit(absNum))
+            if (absNum % 10 == Functions.FirstDigit(absNum))
             {
                 fout.Write(number.ToInt());
             }
         }
         fout.Close();
-    }
-
-    public static void FillMatrix(int[,] m, int n, int firstDigitToReplace, BinaryNumberFile inputFile)
-    {
-        var numbers = inputFile.ReadNextElement().GetEnumerator();
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (numbers.MoveNext())
-                {
-                    int number = numbers.Current.ToInt();
-
-                    if (Functions.Functions.FirstDigit(number) == firstDigitToReplace)
-                    {
-                        number = firstDigitToReplace;
-                    }
-
-                    m[i, j] = number;
-                }
-                else
-                {
-                    return;
-                }
-            }
-        }
     }
     
     public static void SecondTask(string filename = "input.txt",
@@ -61,7 +34,7 @@ class Program
         Console.WriteLine("\n");
 
         int[,] m = new int[n, n];
-        FillMatrix(m, n, firstDigitToReplace, inputFile);
+        Functions.FillMatrix(m, n, firstDigitToReplace, inputFile);
 
         if (printMatrix)
         {
@@ -76,6 +49,11 @@ class Program
         } 
     }
     
+    public static void ThirdTask()
+    {
+
+    }
+
     public static void Main()
     {
         SecondTask();
