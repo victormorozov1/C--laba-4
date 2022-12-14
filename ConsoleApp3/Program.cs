@@ -1,5 +1,4 @@
-﻿using ConsoleApp3;
-using Files;
+﻿using Files;
 
 class Program
 {

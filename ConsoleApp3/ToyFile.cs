@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp3
+namespace Files
 {
     public class ToyFile : BaseFile<Toy, StreamReader, StreamWriter>
     {
@@ -37,14 +37,13 @@ namespace ConsoleApp3
 
         public override void ReadElement(Toy toy) // Сделать через дополнения класса
         {
-           // Console.WriteLine("In ReadElement");
             string word = "";
             for (int i = 0; i < Toy.readFieldsNum; i++)
             {
-                char firstChar = Functions.Functions.ReadSpacesAndFirstChar(fin);
+                char firstChar = fin.ReadSpacesAndFirstChar();
                 word += firstChar;
 
-                foreach (char c in Functions.Functions.ReadWord(fin))
+                foreach (char c in fin.ReadWord())
                 {
                     word += c;
                 }
@@ -53,14 +52,9 @@ namespace ConsoleApp3
                 {
                     word += " ";
                 }
-                //Console.WriteLine("Word = " + word);
             }
 
-            //Console.WriteLine("Word created: " + word);
-
             toy.SetFromString(word);
-
-            //Console.WriteLine("Read end");
         }
 
         public override void CloseReader()

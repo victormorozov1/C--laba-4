@@ -1,6 +1,5 @@
 ﻿namespace Files
-{
-    
+{ 
     public class BinaryNumberFile : BaseFile<Number, BinaryReader, BinaryWriter>
     {
         private readonly int[] numbersRange;
