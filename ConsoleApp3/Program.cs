@@ -23,7 +23,7 @@ class Program
         fout.Close();
     }
 
-    /*public static void FillMatrix(int[,] m, int n, int firstDigitToReplace, BinaryNumberFile inputFile)
+    public static void FillMatrix(int[,] m, int n, int firstDigitToReplace, BinaryNumberFile inputFile)
     {
         var numbers = inputFile.ReadNextElement().GetEnumerator();
 
@@ -31,10 +31,9 @@ class Program
         {
             for (int j = 0; j < n; j++)
             {
-
                 if (numbers.MoveNext())
                 {
-                    var number = numbers.Current;
+                    int number = numbers.Current.ToInt();
 
                     if (Functions.Functions.FirstDigit(number) == firstDigitToReplace)
                     {
@@ -49,15 +48,18 @@ class Program
                 }
             }
         }
-    }*/
+    }
     
-    /*public static void SecondTask(string filename = "input.txt",
+    public static void SecondTask(string filename = "input.txt",
         int n = 10, int firstDigitToReplace = 1, 
         bool printMatrix = true)
     {
-        BinaryNumberFile inputFile = new BinaryNumberFile(filename);
-        inputFile.FillNumbers();
-        
+        BinaryNumberFile inputFile = new BinaryNumberFile(filename, new int[] {10, 100}, new int[] {10, 100}, debug:false);
+        inputFile.RandomFillFile();
+
+        inputFile.WriteFileTOConsole();
+        Console.WriteLine("\n");
+
         int[,] m = new int[n, n];
         FillMatrix(m, n, firstDigitToReplace, inputFile);
 
@@ -72,10 +74,10 @@ class Program
                 Console.WriteLine();
             }
         } 
-    }*/
+    }
     
     public static void Main()
     {
-        FirstTask();
+        SecondTask();
     }
 }

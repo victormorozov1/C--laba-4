@@ -59,7 +59,7 @@
             if (debug)
             {
                 Console.WriteLine($"File {filename} saved into {Directory.GetCurrentDirectory()}");
-                Console.WriteLine($"File {filename} contains {elementsNum} numbers");
+                Console.WriteLine($"File {filename} contains {elementsNum} elements");
             }
         }
 
