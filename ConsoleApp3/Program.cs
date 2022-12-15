@@ -85,7 +85,7 @@ class Program
 
     public static void FourhtTask(int k)
     {
-        var inputFile = new TextNumberFile("4-task-in.txt", new int[] { 10, 100 });
+        var inputFile = new TextNumberFile("4-task-in.txt", new int[] { 10, 100 }, "\n");
         inputFile.RandomFillFile();
 
         var outputFile = new StreamWriter("4-task-out.txt");
@@ -99,8 +99,31 @@ class Program
         outputFile.Close();
     }
 
+    public static void FifthTask()
+    {
+        var inputFile = new TextNumberFile("5-task-in.txt", new int[] { 10, 100 }, " ");
+        inputFile.RandomFillFile();
+
+        var numbers = inputFile.ReadNextElement().GetEnumerator();
+
+        if (!numbers.MoveNext())
+        {
+            Console.WriteLine("Файл пуст");
+            return;
+        }
+
+        var firstNum = numbers.Current.ToInt();
+        int max = firstNum;
+        while (numbers.MoveNext())
+        {
+            max = Math.Max(max, numbers.Current.ToInt());
+        }
+
+        Console.WriteLine("Сумма первого и максимального элементов: " + (firstNum + max));
+    }
+
     public static void Main()
     {
-        FourhtTask(2);
+        FifthTask();
     }
 }

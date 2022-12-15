@@ -1,17 +1,23 @@
 ﻿using FileElements;
 using BaseFileClasses;
 using Extensions;
+using System.Security;
 
 namespace FileClasses;
 
 public class TextNumberFile : BaseTextFile<Number>
 {
     public int[] numbersRange;
-    public TextNumberFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) { }
+    private string sep;
+    public TextNumberFile(string filename, int[] numbersNumRange, string sep, bool debug = true) 
+        : base(filename, numbersNumRange, debug) 
+    {
+        this.sep = sep;
+    }
 
     public override bool WriteElement(Number element)
     {
-        fout.WriteLine(element);
+        fout.Write(element + sep);
         return true;
     }
 
