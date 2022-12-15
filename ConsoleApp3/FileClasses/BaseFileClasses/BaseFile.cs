@@ -22,11 +22,11 @@ public class BaseFile<ElementType, ReaderType, WriterType> where ElementType : F
     }
 
     public virtual void OpenWriter() { }
-    public virtual void WriteElement(ElementType element) { }
+    public virtual bool WriteElement(ElementType element) => false;
     public virtual void CloseWriter() { }
 
     public virtual void OpenReader() { }
-    public virtual void ReadElement(ElementType element) { }
+    public virtual bool ReadElement(ElementType element) => false;
     public virtual void CloseReader() { }
 
     public void RandomFillFile()

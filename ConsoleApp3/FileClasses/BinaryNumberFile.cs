@@ -5,23 +5,17 @@ namespace FileClasses;
 
 public class BinaryNumberFile : BaseFileClasses.BinaryBaseFile<Number>
 {
-    private readonly int[] numbersRange;
+    public BinaryNumberFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) { }
 
-    public BinaryNumberFile(string filename,
-        int[] numbersNumRange,
-        int[] numbersRange,
-        bool debug = true) : base(filename, numbersNumRange, debug)
-    {
-        this.numbersRange = numbersRange;
-    }
-
-    public override void WriteElement(Number element)
+    public override bool WriteElement(Number element)
     {
         fout.Write(element.ToInt());
+        return true;
     }
 
-    public override void ReadElement(Number element)
+    public override bool ReadElement(Number element)
     {
         element.SetVal(fin.ReadInt32());
+        return true;
     }
 }

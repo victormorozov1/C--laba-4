@@ -8,7 +8,7 @@ class Program
 {
     public static void FirstTask()
     {
-        var file = new BinaryNumberFile("input.txt", new int[] { 100, 1000 }, new int[] { 0, 100000 });
+        var file = new BinaryNumberFile("input.txt", new int[] { 100, 1000 });
         file.RandomFillFile();
 
         file.WriteFileTOConsole();
@@ -30,7 +30,7 @@ class Program
         int n = 10, int firstDigitToReplace = 1,
         bool printMatrix = true)
     {
-        BinaryNumberFile inputFile = new BinaryNumberFile(filename, new int[] { 10, 100 }, new int[] { 10, 100 }, debug: false);
+        BinaryNumberFile inputFile = new BinaryNumberFile(filename, new int[] { 10, 100 }, debug: false);
         inputFile.RandomFillFile();
 
         inputFile.WriteFileTOConsole();
@@ -83,8 +83,24 @@ class Program
         }
     }
 
+    public static void FourhtTask(int k)
+    {
+        var inputFile = new TextNumberFile("4-task-in.txt", new int[] { 10, 100 });
+        inputFile.RandomFillFile();
+
+        var outputFile = new StreamWriter("4-task-out.txt");
+
+        foreach (var number in inputFile.ReadNextElement())
+        {
+            Console.WriteLine("writing: " + number.ToInt() / k);
+            outputFile.Write(number.ToInt() / k + "\n");
+        }
+
+        outputFile.Close();
+    }
+
     public static void Main()
     {
-        ThirdTask();
+        FourhtTask(2);
     }
 }
