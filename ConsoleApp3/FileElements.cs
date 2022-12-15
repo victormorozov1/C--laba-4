@@ -41,9 +41,9 @@ public class Number: FileElementInterface<Number>
 
 public class Toy : FileElementInterface<Toy>
 {
-    public int minAge, price;
-    string name;
-    public static int readFieldsNum = 3;
+    public int minAge, maxAge, price;
+    public string name;
+    public static int readFieldsNum = 4;
 
     public static string[] possibleNames = {
         "Spaik",
@@ -51,13 +51,15 @@ public class Toy : FileElementInterface<Toy>
         "Веселый_водовоз",
         "Zaxar",
         "Brawl_Stars_Toy",
-        "Star"
+        "Star",
+        "кубики"
     };
 
-    public Toy(string name, int price, int minAge) {
+    public Toy(string name, int price, int minAge, int maxAge) {
         this.name = name;
         this.price = price;
         this.minAge = minAge;
+        this.maxAge = maxAge;
     }
 
     public static Toy GetRandom(Random random)
@@ -69,19 +71,20 @@ public class Toy : FileElementInterface<Toy>
 
         var name = possibleNames[random.Next(possibleNames.Length)];
         var minAge = random.Next(0, 18);
+        var maxAge = random.Next(minAge, 18);
         var price = random.Next(1, 11964);
-        return new Toy(name, price, minAge);
+        return new Toy(name, price, minAge, maxAge);
     }
 
     public override string ToString()
     {
-        return $"{name} {price} {minAge} ";
+        return $"{name} {price} {minAge} {maxAge}";
     }
 
     public static Toy FromString(string str, string sep = " ")
     {
         var splitData = str.Split(sep);
-        return new Toy(splitData[0], int.Parse(splitData[1]), int.Parse(splitData[2]));
+        return new Toy(splitData[0], int.Parse(splitData[1]), int.Parse(splitData[2]), int.Parse(splitData[3]));
     }
 
     public void SetFromString(string str, string sep = " ")
@@ -93,6 +96,7 @@ public class Toy : FileElementInterface<Toy>
     {
         name = other.name;
         minAge = other.minAge;
+        maxAge = other.maxAge;
         price = other.price;
     } 
 
@@ -102,6 +106,7 @@ public class Toy : FileElementInterface<Toy>
         fout.Write(nameIndex);
         fout.Write(price);
         fout.Write(minAge);
+        fout.Write(maxAge);
     }
 
     public static Toy BinRead(BinaryReader fin)
@@ -109,7 +114,8 @@ public class Toy : FileElementInterface<Toy>
         string name = possibleNames[fin.ReadInt32()];
         int price = fin.ReadInt32();
         int minAge = fin.ReadInt32();
-        return new Toy(name, price, minAge);
+        int maxAge = fin.ReadInt32();   
+        return new Toy(name, price, minAge, maxAge);
     }
 
     public void SetFromBinRead(BinaryReader fin)

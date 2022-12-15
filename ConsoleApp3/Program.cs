@@ -54,9 +54,33 @@ class Program
 
     public static void ThirdTask()
     {
-        var inputFile = new ToyFile("toys_input.txt", new int[] { 4, 5 }, debug: true);
+        var inputFile = new ToyFile("toys_input.txt", new int[] { 10, 15 }, debug: false);
         inputFile.RandomFillFile();
         inputFile.WriteFileTOConsole(sep:"\n");
+
+        int minAge = 999, maxAge = 0;
+        int priceSum = 0, toyNum = 0;
+
+        foreach (var toy in inputFile.ReadNextElement()) 
+        { 
+            if (toy.name == "кубики")
+            {
+                minAge = Math.Min(minAge, toy.minAge);
+                maxAge = Math.Max(maxAge, toy.maxAge);
+                priceSum += toy.price;
+                toyNum++;
+            }
+        }
+
+        if (toyNum > 0)
+        {
+            Console.WriteLine($"Кубики подходят для детей возрастом от {minAge} до {maxAge}");
+            Console.WriteLine($"Сркдняя цена наборов {priceSum / toyNum}");
+        }
+        else
+        {
+            Console.WriteLine("Кубики не найдены(");
+        }
     }
 
     public static void Main()
