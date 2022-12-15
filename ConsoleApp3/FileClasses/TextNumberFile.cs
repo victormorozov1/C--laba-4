@@ -1,5 +1,6 @@
 ﻿using FileElements;
 using BaseFileClasses;
+using Extensions;
 
 namespace FileClasses;
 
@@ -16,7 +17,7 @@ public class TextNumberFile : BaseTextFile<Number>
 
     public override bool ReadElement(Number number)
     {
-        var line = fin.ReadLine();
+        var line = fin.ReadString();
         if (line == null)
         {
             return false;
