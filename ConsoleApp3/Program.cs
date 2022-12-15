@@ -1,4 +1,6 @@
 ﻿using FileClasses;
+using System.Diagnostics;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Main;
 
@@ -52,11 +54,13 @@ class Program
 
     public static void ThirdTask()
     {
-
+        var inputFile = new ToyFile("toys_input.txt", new int[] { 4, 6 }, debug: true);
+        inputFile.RandomFillFile();
+        inputFile.WriteFileTOConsole(sep:"\n");
     }
 
     public static void Main()
     {
-        FirstTask();
+        ThirdTask();
     }
 }

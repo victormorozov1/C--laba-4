@@ -1,0 +1,15 @@
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\bin\Debug\net7.0\LR4.exe
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\bin\Debug\net7.0\LR4.deps.json
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\bin\Debug\net7.0\LR4.runtimeconfig.json
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\bin\Debug\net7.0\LR4.dll
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\bin\Debug\net7.0\LR4.pdb
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.csproj.AssemblyReference.cache
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.AssemblyInfoInputs.cache
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.AssemblyInfo.cs
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.csproj.CoreCompileInputs.cache
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.dll
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\refint\LR4.dll
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.pdb
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\LR4.genruntimeconfig.cache
+C:\Users\danil\RiderProjects\ConsoleApp3\ConsoleApp3\obj\Debug\net7.0\ref\LR4.dll

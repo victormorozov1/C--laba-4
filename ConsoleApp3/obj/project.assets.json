@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\danil\\RiderProjects\\ConsoleApp3\\ConsoleApp3\\ConsoleApp3.csproj",
-      "projectName": "ConsoleApp3",
-      "projectPath": "C:\\Users\\danil\\RiderProjects\\ConsoleApp3\\ConsoleApp3\\ConsoleApp3.csproj",
+      "projectUniqueName": "C:\\Users\\danil\\RiderProjects\\ConsoleApp3\\ConsoleApp3\\LR4.csproj",
+      "projectName": "LR4",
+      "projectPath": "C:\\Users\\danil\\RiderProjects\\ConsoleApp3\\ConsoleApp3\\LR4.csproj",
       "packagesPath": "C:\\Users\\danil\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\danil\\RiderProjects\\ConsoleApp3\\ConsoleApp3\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,4 +1,5 @@
 ﻿using FileElements;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace BaseFileClasses;
 
@@ -6,8 +7,12 @@ public class BinaryBaseFile<ElementType> : BaseFile<ElementType, BinaryReader, B
 {
     private readonly int[] numbersRange;
     public bool debug;
+    BinaryFormatter formatter;
 
-    public BinaryBaseFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) { }
+    public BinaryBaseFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) 
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+    }
 
     public override void OpenWriter()
     {
