@@ -8,13 +8,10 @@ class Program
 {
     public static void FirstTask()
     {
-        var file = new BinaryNumberFile("input.txt", new int[] { 100, 1000 });
+        var file = new BinaryNumberFile(Functions.GetFileName(1, Functions.FileTypes.input), new int[] { 100, 1000 }, debug: true);
         file.RandomFillFile();
 
-        file.WriteFileTOConsole();
-        Console.WriteLine();
-
-        BinaryWriter fout = new BinaryWriter(File.Open("output.txt", FileMode.Create));
+        BinaryWriter fout = new BinaryWriter(File.Open(Functions.GetFileName(1, Functions.FileTypes.output), FileMode.Create));
         foreach (var number in file.ReadNextElement())
         {
             int absNum = Math.Abs(number.ToInt());
@@ -26,11 +23,10 @@ class Program
         fout.Close();
     }
 
-    public static void SecondTask(string filename = "input.txt",
-        int n = 10, int firstDigitToReplace = 1,
-        bool printMatrix = true)
+    public static void SecondTask(int n = 10, int firstDigitToReplace = 1, bool printMatrix = true)
     {
-        BinaryNumberFile inputFile = new BinaryNumberFile(filename, new int[] { 10, 100 }, debug: false);
+        BinaryNumberFile inputFile = new BinaryNumberFile(Functions.GetFileName(2, Functions.FileTypes.input), 
+            new int[] { 10, 100 }, debug: false);
         inputFile.RandomFillFile();
 
         inputFile.WriteFileTOConsole();
@@ -54,7 +50,7 @@ class Program
 
     public static void ThirdTask()
     {
-        var inputFile = new ToyFile("toys_input.txt", debug: false);
+        var inputFile = new ToyFile(Functions.GetFileName(3, Functions.FileTypes.input), debug: false);
         inputFile.RandomFillFile();
         inputFile.WriteFileTOConsole(sep:"\n");
 
@@ -85,14 +81,13 @@ class Program
 
     public static void FourhtTask(int k)
     {
-        var inputFile = new TextNumberFile("4-task-in.txt", "\n");
+        var inputFile = new TextNumberFile(Functions.GetFileName(4, Functions.FileTypes.input), "\n");
         inputFile.RandomFillFile();
 
-        var outputFile = new StreamWriter("4-task-out.txt");
+        var outputFile = new StreamWriter(Functions.GetFileName(4, Functions.FileTypes.output));
 
         foreach (var number in inputFile.ReadNextElement())
         {
-            Console.WriteLine("writing: " + number.ToInt() / k);
             outputFile.Write(number.ToInt() / k + "\n");
         }
 
@@ -101,7 +96,7 @@ class Program
 
     public static void FifthTask()
     {
-        var inputFile = new TextNumberFile("5-task-in.txt", " ");
+        var inputFile = new TextNumberFile(Functions.GetFileName(5, Functions.FileTypes.input), " ");
         inputFile.RandomFillFile();
 
         var numbers = inputFile.ReadNextElement().GetEnumerator();
@@ -135,7 +130,6 @@ class Program
             {
                 outputFile.WriteLine(line);
             }
-            Console.WriteLine(line);
         }
 
         outputFile.Close();
