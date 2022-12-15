@@ -95,4 +95,25 @@ public class Toy : FileElementInterface<Toy>
         minAge = other.minAge;
         price = other.price;
     } 
+
+    public void BinWrite(BinaryWriter fout)
+    {
+        int nameIndex = Array.IndexOf(possibleNames, name);
+        fout.Write(nameIndex);
+        fout.Write(price);
+        fout.Write(minAge);
+    }
+
+    public static Toy BinRead(BinaryReader fin)
+    {
+        string name = possibleNames[fin.ReadInt32()];
+        int price = fin.ReadInt32();
+        int minAge = fin.ReadInt32();
+        return new Toy(name, price, minAge);
+    }
+
+    public void SetFromBinRead(BinaryReader fin)
+    {
+        Clone(Toy.BinRead(fin));
+    }
 }

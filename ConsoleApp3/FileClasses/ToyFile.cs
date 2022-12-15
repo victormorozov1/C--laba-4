@@ -9,11 +9,11 @@ public class ToyFile : BinaryBaseFile<Toy>
 
     public override void WriteElement(Toy element)
     {
-        fout.Write(element.ToString());
+        element.BinWrite(fout);
     }
 
     public override void ReadElement(Toy toy)
     {
-        toy.SetFromString(fin.ReadString());
+        toy.SetFromBinRead(fin);
     }
 }

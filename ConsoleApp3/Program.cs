@@ -54,7 +54,7 @@ class Program
 
     public static void ThirdTask()
     {
-        var inputFile = new ToyFile("toys_input.txt", new int[] { 4, 6 }, debug: true);
+        var inputFile = new ToyFile("toys_input.txt", new int[] { 4, 5 }, debug: true);
         inputFile.RandomFillFile();
         inputFile.WriteFileTOConsole(sep:"\n");
     }
