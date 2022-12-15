@@ -39,6 +39,35 @@ public class Number: FileElementInterface<Number>
     }
 }
 
+public class FileString : FileElementInterface<FileString>
+{
+    public string str;
+
+    public FileString(string str)
+    {
+        this.str = str;
+    }
+
+    public override string ToString()
+    {
+        return str;
+    }
+
+    public static FileString GetRandom(Random random)
+    {
+        if (random == null)
+        {
+            random = new Random();
+        }
+        var len = random.Next(1, 10);
+        string str = "";
+        for (int i = 0; i < len;  i++)
+        {
+            str += (char)random.Next((int)'а', (int)'я' + 1);
+        }
+        return new FileString(str);
+    }
+}
 public class Toy : FileElementInterface<Toy>
 {
     public int minAge, maxAge, price;

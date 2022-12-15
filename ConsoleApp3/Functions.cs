@@ -34,4 +34,24 @@ public static class Functions
             }
         }
     }
+
+    public static string GetFileName(int taskNum, FileTypes type)
+    {
+        string t;
+        if (type == FileTypes.input)
+        {
+            t = "in";
+        }
+        else
+        {
+            t = "out";
+        }
+        return $"{taskNum}-task-{t}.txt";
+    }
+
+    public enum FileTypes
+    {
+        input,
+        output
+    }
 }

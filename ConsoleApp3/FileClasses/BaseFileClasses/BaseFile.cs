@@ -14,11 +14,19 @@ public class BaseFile<ElementType, ReaderType, WriterType> where ElementType : F
     public WriterType fout;
     public ReaderType fin;
 
-    public BaseFile(string filename, int[] elementsNumRange, bool debug = true)
+    public BaseFile(string filename, int[] elementsNumRange = null, bool debug = true)
     {
         this.filename = filename;
         this.debug = debug;
-        this.elementsNumRange = elementsNumRange;
+
+        if (elementsNumRange == null)
+        {
+            this.elementsNumRange = new int[] { 10, 100 };
+        }
+        else
+        {
+            this.elementsNumRange = elementsNumRange;
+        }
     }
 
     public virtual void OpenWriter() { }

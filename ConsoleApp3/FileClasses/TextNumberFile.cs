@@ -9,7 +9,7 @@ public class TextNumberFile : BaseTextFile<Number>
 {
     public int[] numbersRange;
     private string sep;
-    public TextNumberFile(string filename, int[] numbersNumRange, string sep, bool debug = true) 
+    public TextNumberFile(string filename, string sep, int[] numbersNumRange = null, bool debug = true) 
         : base(filename, numbersNumRange, debug) 
     {
         this.sep = sep;

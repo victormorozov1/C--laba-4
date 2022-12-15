@@ -9,7 +9,7 @@ public class BinaryBaseFile<ElementType> : BaseFile<ElementType, BinaryReader, B
     public bool debug;
     BinaryFormatter formatter;
 
-    public BinaryBaseFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) 
+    public BinaryBaseFile(string filename, int[] numbersNumRange = null, bool debug = true) : base(filename, numbersNumRange, debug) 
     {
         BinaryFormatter formatter = new BinaryFormatter();
     }

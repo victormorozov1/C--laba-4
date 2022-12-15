@@ -5,7 +5,7 @@ namespace FileClasses;
 
 public class BinaryNumberFile : BaseFileClasses.BinaryBaseFile<Number>
 {
-    public BinaryNumberFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) { }
+    public BinaryNumberFile(string filename, int[] numbersNumRange = null, bool debug = true) : base(filename, numbersNumRange, debug) { }
 
     public override bool WriteElement(Number element)
     {

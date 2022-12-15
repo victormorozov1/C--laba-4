@@ -5,7 +5,7 @@ namespace FileClasses;
 
 public class ToyFile : BinaryBaseFile<Toy>
 {
-    public ToyFile(string filename, int[] numbersNumRange, bool debug = true) : base(filename, numbersNumRange, debug) { }
+    public ToyFile(string filename, int[] numbersNumRange = null, bool debug = true) : base(filename, numbersNumRange, debug) { }
 
     public override bool WriteElement(Toy element)
     {

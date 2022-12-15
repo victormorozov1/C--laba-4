@@ -54,7 +54,7 @@ class Program
 
     public static void ThirdTask()
     {
-        var inputFile = new ToyFile("toys_input.txt", new int[] { 10, 15 }, debug: false);
+        var inputFile = new ToyFile("toys_input.txt", debug: false);
         inputFile.RandomFillFile();
         inputFile.WriteFileTOConsole(sep:"\n");
 
@@ -85,7 +85,7 @@ class Program
 
     public static void FourhtTask(int k)
     {
-        var inputFile = new TextNumberFile("4-task-in.txt", new int[] { 10, 100 }, "\n");
+        var inputFile = new TextNumberFile("4-task-in.txt", "\n");
         inputFile.RandomFillFile();
 
         var outputFile = new StreamWriter("4-task-out.txt");
@@ -101,7 +101,7 @@ class Program
 
     public static void FifthTask()
     {
-        var inputFile = new TextNumberFile("5-task-in.txt", new int[] { 10, 100 }, " ");
+        var inputFile = new TextNumberFile("5-task-in.txt", " ");
         inputFile.RandomFillFile();
 
         var numbers = inputFile.ReadNextElement().GetEnumerator();
@@ -122,8 +122,27 @@ class Program
         Console.WriteLine("Сумма первого и максимального элементов: " + (firstNum + max));
     }
 
+    public static void SixthTask()
+    {
+        var inputFile = new TextFile(Functions.GetFileName(6, Functions.FileTypes.input), numbersNumRange: new int[] {1000, 2000});
+        inputFile.RandomFillFile();
+
+        var outputFile = new StreamWriter(Functions.GetFileName(6, Functions.FileTypes.output));
+        
+        foreach (var line in inputFile.ReadNextElement())
+        {
+            if (line.str.Length >= 1 && line.str[0] == 'б' || line.str.Length >= 2 && line.str[1] == 'б')
+            {
+                outputFile.WriteLine(line);
+            }
+            Console.WriteLine(line);
+        }
+
+        outputFile.Close();
+    }
+
     public static void Main()
     {
-        FifthTask();
+        SixthTask();
     }
 }
