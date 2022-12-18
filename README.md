@@ -5,9 +5,7 @@
 
 Сущность стандартного элемента файла (числа, строки или структуры) описана следующим интерфейсом:
 
-
-
-```
+```c#
 public interface FileElementInterface<T>
 {
     public static abstract T GetRandom(Random random);
@@ -16,42 +14,57 @@ public interface FileElementInterface<T>
 }
 ```
 
-Чтобы создать класс стандапртного элемента файла, соответствующего данному интерфейсу, делаем так:
+Метод ```GetRandom``` возвращает случайный экземпляр соответствующего класса.
 
-```
+Метод ```ToString``` возвращает строковое представление.
+
+---
+
+Чтобы создать класс стандартного элемента файла, соответствующего данному интерфейсу, необходимо унаследовать его от выше описанного интерфейса. Например при создании класса ```Number```:
+
+```c#
 public class Number: FileElementInterface<Number>
+```
+
+У класса ```Number``` есть все методы, необходимые для соответствия интерфейсу:
+```c#
+public static Number GetRandom(Random random)
 {
-    private int y;
-    public Number(int y)
+    if (random == null)
     {
-        this.y = y;
+        random = new Random();
     }
-    public static Number GetRandom(Random random)
-    {
-        if (random == null)
-        {
-            random = new Random();
-        }
-        return new Number(random.Next(-100, 100));
-    }
-
-    public override string ToString()
-    {
-        return y.ToString();
-    }
-
-    public void SetVal(int val)
-    {
-        y = val;
-    }
-
-    public int ToInt() 
-    {
-        return y;
-    }
+    return new Number(random.Next(-100, 100));
 }
 
+public override string ToString()
+{
+    return y.ToString();
+}
 ```
+
+А так-же конструктор:
+```c#
+public Number(int y)
+{
+    this.y = y;
+}
+```
+
+И пара других полезных методов:
+```c#
+public void SetVal(int val)
+{
+    y = val;
+}
+
+public int ToInt() 
+{
+    return y;
+}
+```
+
+Аналогично описываются другие классы элементов файла.
 
 ### Классы
 
@@ -173,6 +186,8 @@ public class BaseFile<ElementType, ReaderType, WriterType> where ElementType : F
 }
 ```
 
+Как видно, некоторые методы класса, которые будут одинаковы для всех дочерних классов, уже описаны. Остальные методы будут описываться в дочерних классах.
+
 От данного класса я наследовал классы ```BasetextFile``` и ```BinaryBaseFile```. 
 
 Так к примеру я описываю ```BaseTextFile```:
@@ -206,7 +221,7 @@ public class BaseTextFile<FileElement> : BaseFile<FileElement, StreamReader, Str
 
 От данных классов я наследую классы ```BinaryNumberFile```, ```TextFile```, ```TextNumberFile``` и ```ToyFile```.
 
-Например класс ```BinaryNumberFile``` я создаю так:
+Например класс ```BinaryNumberFile``` я описываю так:
 
 ```
 public class BinaryNumberFile : BaseFileClasses.BinaryBaseFile<Number>
@@ -231,117 +246,295 @@ public class BinaryNumberFile : BaseFileClasses.BinaryBaseFile<Number>
 
 ### Расаширение класса ```StreamWriter```
 
-Для удобства я расгирил данный класс.
+Для удобства я расширил данный класс, добавив к нему полезные методы:
 
-```
-public static class StreamReaderExtension
+1) Первый метод считывает все разделяющие символы (пробелы, переводы строк...) и возвращает первый считанный символ слова.
+
+```c#
+public static char ReadSpacesAndFirstChar(this StreamReader reader, char[] sepSymbols2 = null)
 {
-    public static char[] sepSymbols = new char[] { ' ', '\n' };
-    public static char ReadSpacesAndFirstChar(this StreamReader reader, char[] sepSymbols2 = null)
+    if (sepSymbols2 == null)
     {
-        if (sepSymbols2 == null)
-        {
-            sepSymbols2 = sepSymbols;
-        }
-
-        char c = sepSymbols2[0];
-
-        while (!reader.EndOfStream && sepSymbols2.Contains(c))
-        {
-            c = (char)reader.Read();
-        };
-        return c;
+        sepSymbols2 = sepSymbols;
     }
 
-    public static IEnumerable<char> ReadStringAfterFirstChar(this StreamReader reader, char[] sepSymbols2 = null)
-    {
-        if (sepSymbols2 == null)
-        {
-            sepSymbols2 = sepSymbols;
-        }
+    char c = sepSymbols2[0];
 
-        char c = '-';
-        while (!reader.EndOfStream)
-        {
-            c = (char)reader.Read();
-            if (sepSymbols2.Contains(c))
-            {
-                yield break;
-            }
-            
-            yield return c;
-            
-        }
-        yield break;
+    while (!reader.EndOfStream && sepSymbols2.Contains(c))
+    {
+        c = (char)reader.Read();
+    };
+    return c;
+}
+```
+
+2) Данный метод по очереди возвращает все символы слова после первого символа. Метод удобно использовать после предыдущего, чтобы счиатть все слово.
+```c#
+public static IEnumerable<char> ReadStringAfterFirstChar(this StreamReader reader, char[] sepSymbols2 = null)
+{
+    if (sepSymbols2 == null)
+    {
+        sepSymbols2 = sepSymbols;
     }
 
-    public static string ReadString(this StreamReader reader, char[] sepSymbols = null)
+    char c = '-';
+    while (!reader.EndOfStream)
     {
-        string s = "" + ReadSpacesAndFirstChar(reader, sepSymbols2: sepSymbols);
-        foreach (char c in ReadStringAfterFirstChar(reader, sepSymbols2: sepSymbols))
+        c = (char)reader.Read();
+        if (sepSymbols2.Contains(c))
         {
-            s += c;
+            yield break;
         }
-        return s;
+        
+        yield return c;
+        
     }
+    yield break;
+}
+```
+3) Метод, обьединяющий предыдущие 2 в один. Возвращает считанную строку.
+```c#
+public static string ReadString(this StreamReader reader, char[] sepSymbols = null)
+{
+    string s = "" + ReadSpacesAndFirstChar(reader, sepSymbols2: sepSymbols);
+    foreach (char c in ReadStringAfterFirstChar(reader, sepSymbols2: sepSymbols))
+    {
+        s += c;
+    }
+    return s;
 }
 ```
 
 ### Вспомогательные функции
-
-```
-public static class Functions
+Получение первой цифры числа
+```c#
+public static int FirstDigit(int number)
 {
-    public static int FirstDigit(int number)
-    {
-        return int.Parse(Math.Abs(number).ToString()[0].ToString());
-    }
-    public static void FillMatrix(int[,] m, int n, int firstDigitToReplace, BinaryNumberFile inputFile)
-    {
-        var numbers = inputFile.ReadNextElement().GetEnumerator();
+    return int.Parse(Math.Abs(number).ToString()[0].ToString());
+}
+```
 
-        for (int i = 0; i < n; i++)
+Функция заполнения матрицы числами из файла:
+```c#
+public static void FillMatrix(int[,] m, int n, int firstDigitToReplace, BinaryNumberFile inputFile)
+{
+    var numbers = inputFile.ReadNextElement().GetEnumerator();
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
         {
-            for (int j = 0; j < n; j++)
+            if (numbers.MoveNext())
             {
-                if (numbers.MoveNext())
-                {
-                    int number = numbers.Current.ToInt();
+                int number = numbers.Current.ToInt();
 
-                    if (FirstDigit(number) == firstDigitToReplace)
-                    {
-                        number = firstDigitToReplace;
-                    }
-
-                    m[i, j] = number;
-                }
-                else
+                if (FirstDigit(number) == firstDigitToReplace)
                 {
-                    return;
+                    number = firstDigitToReplace;
                 }
+
+                m[i, j] = number;
+            }
+            else
+            {
+                return;
             }
         }
     }
+}
+```
 
-    public static string GetFileName(int taskNum, FileTypes type)
+Функция получения имени файла для текущего задания (чтобы все имена файлов быди в одном формате)
+```c#
+public static string GetFileName(int taskNum, FileTypes type)
+{
+    string t;
+    if (type == FileTypes.input)
     {
-        string t;
-        if (type == FileTypes.input)
-        {
-            t = "in";
-        }
-        else
-        {
-            t = "out";
-        }
-        return $"{taskNum}-task-{t}.txt";
+        t = "in";
     }
+    else
+    {
+        t = "out";
+    }
+    return $"{taskNum}-task-{t}.txt";
+}
+```
+В этой функции используется следующий ```enum```:
+```c#
+public enum FileTypes
+{
+    input,
+    output
+}
+```
 
-    public enum FileTypes
+### Выполнение поставленных задач:
+
+#### Задача 1.
+
+***Переписать в новый файл компоненты исходного, начинающиеся и
+   заканчивающиеся на одну и ту же цифру***
+
+Ссоздание и заполнение исходного файла:
+```c#
+var file = new BinaryNumberFile(Functions.GetFileName(1, Functions.FileTypes.input), new int[] { 100, 1000 }, debug: true);
+file.RandomFillFile();
+```
+Открытие файла, куда будем записывать ответ:
+```c#
+BinaryWriter fout = new BinaryWriter(File.Open(Functions.GetFileName(1, Functions.FileTypes.output), FileMode.Create));
+```
+
+Переписываем числа, соблюдая поставленные условия:
+```c#
+foreach (var number in file.ReadNextElement())
+{
+    int absNum = Math.Abs(number.ToInt());
+    if (absNum % 10 == Functions.FirstDigit(absNum))
     {
-        input,
-        output
+        fout.Write(number.ToInt());
     }
+}
+```
+Закрываем выходной файл:
+```c#
+fout.Close();
+```
+
+#### Задача 2.
+***Скопировать элементы заданного файла в квадратную матрицу
+размером n×n (если элементов файла недостает, заполнить оставшиеся
+элементы матрицы нулями). Заменить все элементы, начинающиеся с
+заданной цифры, на эту цифру.***
+
+Создаем и заполняем входной файл, выводим его в консоль чтобы было удобнее отслеживать результат:
+```c#
+BinaryNumberFile inputFile = new BinaryNumberFile(Functions.GetFileName(2, Functions.FileTypes.input), 
+            new int[] { 10, 100 }, debug: false);
+inputFile.RandomFillFile();
+
+inputFile.WriteFileTOConsole();
+Console.WriteLine("\n");
+```
+
+Заполняем, и, если нужно, выводим матрицу:
+```c#
+int[,] m = new int[n, n];
+Functions.FillMatrix(m, n, firstDigitToReplace, inputFile);
+
+if (printMatrix)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            Console.Write(m[i, j] + " ");
+        }
+        Console.WriteLine();
+    }
+}
+```
+
+#### Задание 3.
+
+***Файл содержит сведения об игрушках: название игрушки, ее стоимость в
+рублях и возрастные границы (например, игрушка может предназначаться для
+детей от двух до пяти лет). Для детей какого возраста предназначены кубики?
+Указать их среднюю стоимость.***
+
+Создаем и заполняем файл (код не привожу, ибо он аналогичен прошлым задачам)
+
+Ищем и выводим ответ:
+
+```C#
+int minAge = 999, maxAge = 0;
+int priceSum = 0, toyNum = 0;
+
+foreach (var toy in inputFile.ReadNextElement()) 
+{ 
+    if (toy.name == "кубики")
+    {
+        minAge = Math.Min(minAge, toy.minAge);
+        maxAge = Math.Max(maxAge, toy.maxAge);
+        priceSum += toy.price;
+        toyNum++;
+    }
+}
+
+if (toyNum > 0)
+{
+    Console.WriteLine($"Кубики подходят для детей возрастом от {minAge} до {maxAge}");
+    Console.WriteLine($"Сркдняя цена наборов {priceSum / toyNum}");
+}
+else
+{
+    Console.WriteLine("Кубики не найдены(");
+}
+```
+
+#### Задание 4.
+
+***Получить новый файл, уменьшив каждый элемент исходного в k раз***
+
+Создаем входной и выходной файлы, фходной заполняем случайными числами.
+
+Затем решаем поставленную задачу:
+```c#
+foreach (var number in inputFile.ReadNextElement())
+{
+   outputFile.Write(number.ToInt() / k + "\n");
+}
+```
+Закрываем выходной файл. (Входной закрывается автоматически внутри функции)
+
+#### Задание 5.
+
+***Найти сумму первого и максимального элементов.***
+
+Создаем и заполняем вхродной файл. 
+
+Открываем его для чтения, проверяем, что он не пустой (иначе мы не смогли бы найти ответ):
+
+```c#
+var numbers = inputFile.ReadNextElement().GetEnumerator();
+
+if (!numbers.MoveNext())
+{
+   Console.WriteLine("Файл пуст");
+   return;
+}
+```
+
+Ищем и выводи ответ:
+
+```c#
+var firstNum = numbers.Current.ToInt();
+int max = firstNum;
+while (numbers.MoveNext())
+{
+   max = Math.Max(max, numbers.Current.ToInt());
+}
+
+Console.WriteLine("Сумма первого и максимального элементов: " + (firstNum + max));
+```
+
+#### 6 Задание
+
+***В файле хранится произвольный текст. Переписать в другой файл строки, в
+которых первой или второй буквой является "б"***
+
+Открываем нужные файлы
+
+Делаем задачу:
+
+```c#
+foreach (var line in inputFile.ReadNextElement())
+{
+   if (line.str.Length >= 1 && line.str[0] == 'б' || line.str.Length >= 2 && line.str[1] == 'б')
+   {
+       outputFile.WriteLine(line);
+   }
 }
 ```
 
