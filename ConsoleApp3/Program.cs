@@ -1,4 +1,5 @@
 ﻿using FileClasses;
+using System;
 using System.Diagnostics;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -8,8 +9,12 @@ class Program
 {
     public static void FirstTask()
     {
-        var file = new BinaryNumberFile(Functions.GetFileName(1, Functions.FileTypes.input), new int[] { 100, 1000 }, debug: true);
+        var file = new BinaryNumberFile(Functions.GetFileName(1, Functions.FileTypes.input), 
+            new int[] { 10, 20 }, debug: false);
         file.RandomFillFile();
+
+        Console.WriteLine("Input File:");
+        file.WriteFileTOConsole();
 
         BinaryWriter fout = new BinaryWriter(File.Open(Functions.GetFileName(1, Functions.FileTypes.output), FileMode.Create));
         foreach (var number in file.ReadNextElement())
@@ -21,6 +26,16 @@ class Program
             }
         }
         fout.Close();
+
+        Console.WriteLine("\n\nOutput File");
+
+        BinaryReader fin = new BinaryReader(
+            File.Open(Functions.GetFileName(1, Functions.FileTypes.output), 
+            FileMode.Open));
+        while (fin.BaseStream.Position < fin.BaseStream.Length)
+        {
+            Console.WriteLine(fin.ReadInt32());
+        }
     }
 
     public static void SecondTask(int n = 10, int firstDigitToReplace = 1, bool printMatrix = true)
@@ -29,6 +44,7 @@ class Program
             new int[] { 10, 100 }, debug: false);
         inputFile.RandomFillFile();
 
+        Console.WriteLine("Input File:");
         inputFile.WriteFileTOConsole();
         Console.WriteLine("\n");
 
@@ -37,11 +53,12 @@ class Program
 
         if (printMatrix)
         {
+            Console.WriteLine("Output Matrix:");
             for (int i = 0; i < n; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    Console.Write(m[i, j] + " ");
+                    Console.Write(m[i, j] + "\t");
                 }
                 Console.WriteLine();
             }
@@ -52,6 +69,8 @@ class Program
     {
         var inputFile = new ToyFile(Functions.GetFileName(3, Functions.FileTypes.input), debug: false);
         inputFile.RandomFillFile();
+
+        Console.WriteLine("Input File:");
         inputFile.WriteFileTOConsole(sep:"\n");
 
         int minAge = 999, maxAge = 0;
@@ -92,10 +111,15 @@ class Program
         }
 
         outputFile.Close();
+
+        var fin = new StreamReader(Functions.GetFileName(4, Functions.FileTypes.output));
+        Console.WriteLine("Output File:");
+        Console.WriteLine(fin.ReadToEnd());
     }
 
     public static void FifthTask()
     {
+        Console.WriteLine("\nFifth Task");
         var inputFile = new TextNumberFile(Functions.GetFileName(5, Functions.FileTypes.input), " ");
         inputFile.RandomFillFile();
 
@@ -119,7 +143,7 @@ class Program
 
     public static void SixthTask()
     {
-        var inputFile = new TextFile(Functions.GetFileName(6, Functions.FileTypes.input), numbersNumRange: new int[] {1000, 2000});
+        var inputFile = new TextFile(Functions.GetFileName(6, Functions.FileTypes.input), numbersNumRange: new int[] {100, 200});
         inputFile.RandomFillFile();
 
         var outputFile = new StreamWriter(Functions.GetFileName(6, Functions.FileTypes.output));
@@ -133,10 +157,25 @@ class Program
         }
 
         outputFile.Close();
+
+        Console.WriteLine("Output:");
+        var fin = new StreamReader(Functions.GetFileName(6, Functions.FileTypes.output));
+        Console.WriteLine(fin.ReadToEnd());
     }
 
     public static void Main()
     {
+        Console.WriteLine("First Task");
+        FirstTask();
+        Console.WriteLine("\nSecond Task");
+        SecondTask();
+        Console.WriteLine("\nThird Task");
+        ThirdTask();
+        Console.WriteLine("\nFourth Task");
+        FourhtTask(3);
+        Console.WriteLine("\nTFifth Task");
+        FifthTask();
+        Console.WriteLine("\nSixth Task");
         SixthTask();
     }
 }
