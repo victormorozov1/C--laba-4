@@ -69,7 +69,7 @@ public int ToInt()
 ### Классы
 
 #### Базовый класс файла:
-```
+```c#
 public class BaseFile<ElementType, ReaderType, WriterType> where ElementType : FileElementInterface<ElementType>
 {
     public readonly string filename;
@@ -191,7 +191,7 @@ public class BaseFile<ElementType, ReaderType, WriterType> where ElementType : F
 От данного класса я наследовал классы ```BasetextFile``` и ```BinaryBaseFile```. 
 
 Так к примеру я описываю ```BaseTextFile```:
-```
+```c#
 public class BaseTextFile<FileElement> : BaseFile<FileElement, StreamReader, StreamWriter>
     where FileElement : FileElementInterface<FileElement>
 {
@@ -223,7 +223,7 @@ public class BaseTextFile<FileElement> : BaseFile<FileElement, StreamReader, Str
 
 Например класс ```BinaryNumberFile``` я описываю так:
 
-```
+```c#
 public class BinaryNumberFile : BaseFileClasses.BinaryBaseFile<Number>
 {
     public BinaryNumberFile(string filename, int[] numbersNumRange = null, bool debug = true) : base(filename, numbersNumRange, debug) { }
